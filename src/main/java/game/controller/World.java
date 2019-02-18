@@ -1,12 +1,13 @@
 package game.controller;
 
 import game.input.KeyInput;
-import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
-import game.model.object.movable.Trail;
-import game.model.object.GameObject;
 import game.model.MovementConstants;
-import game.model.object.movable.Player;
 import game.model.behaviour.movement.Follow;
+import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
+import game.model.object.GameObject;
+import game.model.object.Handler;
+import game.model.object.movable.Player;
+import game.model.object.movable.Trail;
 
 import java.awt.*;
 import java.util.Random;

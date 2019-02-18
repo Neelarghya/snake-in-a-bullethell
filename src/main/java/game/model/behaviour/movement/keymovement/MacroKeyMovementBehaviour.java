@@ -1,8 +1,8 @@
 package game.model.behaviour.movement.keymovement;
 
-import game.model.object.movable.MovableObject;
 import game.model.MovementConstants;
 import game.model.behaviour.movement.Movement;
+import game.model.object.movable.MovableObject;
 
 public class MacroKeyMovementBehaviour extends Movement {
     private boolean movingRight;

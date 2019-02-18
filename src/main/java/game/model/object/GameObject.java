@@ -14,9 +14,10 @@ public abstract class GameObject {
     }
 
     public abstract void tick();
+
     public abstract void render(Graphics graphics);
 
-    public boolean is(ObjectType type){
+    boolean is(ObjectType type) {
         return this.type == type;
     }
 

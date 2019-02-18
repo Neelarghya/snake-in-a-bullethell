@@ -1,6 +1,7 @@
 package game.controller;
 
 import game.input.KeyInput;
+import game.model.object.Handler;
 import game.view.Window;
 
 import java.awt.*;

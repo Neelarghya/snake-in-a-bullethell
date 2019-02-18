@@ -1,7 +1,4 @@
-package game.controller;
-
-import game.model.object.GameObject;
-import game.model.object.ObjectType;
+package game.model.object;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -15,19 +12,19 @@ public class Handler {
         objects = new ArrayList<>();
     }
 
-    void tick() {
+    public void tick() {
         for (GameObject object : objects) {
             object.tick();
         }
     }
 
-    void render(Graphics graphics) {
+    public void render(Graphics graphics) {
         for (GameObject object : objects) {
             object.render(graphics);
         }
     }
 
-    void addObject(GameObject object) {
+    public void addObject(GameObject object) {
         objects.add(object);
     }
 
