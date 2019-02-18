@@ -15,8 +15,8 @@ public class Game extends Canvas implements Runnable {
 
     public Game(Handler handler) {
         running = false;
-        world = new World(handler);
-        KeyInput keyInput = new KeyInput(world.getMacroKeyMovementBehaviour());
+        KeyInput keyInput = new KeyInput();
+        world = new World(handler, keyInput);
         this.addKeyListener(keyInput);
         new Window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, this);
     }

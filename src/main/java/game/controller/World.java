@@ -1,5 +1,6 @@
 package game.controller;
 
+import game.input.KeyInput;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
 import game.model.object.movable.Trail;
 import game.model.object.GameObject;
@@ -15,24 +16,28 @@ import static game.common.Constant.WINDOW_WIDTH;
 
 class World {
     private Handler handler;
+    private KeyInput keyInput;
     private Random random;
-    private MacroKeyMovementBehaviour macroKeyMovementBehaviour;
 
-    World(Handler handler) {
+    World(Handler handler, KeyInput keyInput) {
         this.handler = handler;
+        this.keyInput = keyInput;
         this.random = new Random();
         build(handler);
     }
 
     private void build(Handler handler) {
         addPlayer(handler);
+        addPlayer(handler);
+        addPlayer(handler);
     }
 
     private void addPlayer(Handler handler) {
         int numberOfEnemies = 50;
         Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT));
-        macroKeyMovementBehaviour = new MacroKeyMovementBehaviour(player);
+        MacroKeyMovementBehaviour macroKeyMovementBehaviour = new MacroKeyMovementBehaviour(player);
         player.addBehaviour(macroKeyMovementBehaviour);
+        keyInput.addBehaviour(macroKeyMovementBehaviour);
 
         handler.addObject(player);
         addTrail(handler, numberOfEnemies, player);
@@ -52,10 +57,6 @@ class World {
             handler.addObject(trail);
             lastObject = trail;
         }
-    }
-
-    MacroKeyMovementBehaviour getMacroKeyMovementBehaviour() {
-        return macroKeyMovementBehaviour;
     }
 
     void tick() {
