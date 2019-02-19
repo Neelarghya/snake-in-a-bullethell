@@ -29,8 +29,6 @@ class World {
 
     private void build(Handler handler) {
         addPlayer(handler);
-        addPlayer(handler);
-        addPlayer(handler);
     }
 
     private void addPlayer(Handler handler) {

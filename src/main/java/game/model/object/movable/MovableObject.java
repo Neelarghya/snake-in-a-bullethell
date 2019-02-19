@@ -30,7 +30,6 @@ public abstract class MovableObject extends GameObject {
 
     private void move() {
         behaviours.forEach(Behaviour::behave);
-//        setUpSpeed();
         regulateSpeed();
         x += xSpeed;
         y += ySpeed;
