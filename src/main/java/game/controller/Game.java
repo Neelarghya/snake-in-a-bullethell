@@ -1,6 +1,7 @@
 package game.controller;
 
 import game.input.KeyInput;
+import game.model.object.ui.HeadsUpDisplay;
 import game.model.object.Handler;
 import game.view.Window;
 
@@ -11,15 +12,15 @@ import static game.common.Constant.*;
 
 public class Game extends Canvas implements Runnable {
     private Thread thread;
-    private KeyInput keyInput;
     private World world;
     private boolean running;
+    private HeadsUpDisplay headsUpDisplay;
 
     public Game(KeyInput keyInput, Handler handler) {
-        this.keyInput = keyInput;
+        headsUpDisplay = new HeadsUpDisplay();
         running = false;
-        world = new World(handler, this.keyInput);
-        this.addKeyListener(this.keyInput);
+        world = new World(handler, keyInput, headsUpDisplay);
+        this.addKeyListener(keyInput);
         new Window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, this);
     }
 
