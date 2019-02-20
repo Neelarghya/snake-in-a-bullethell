@@ -8,6 +8,9 @@ import game.model.object.ObjectType;
 import java.util.ArrayList;
 import java.util.List;
 
+import static game.common.Constant.WINDOW_HEIGHT;
+import static game.common.Constant.WINDOW_WIDTH;
+
 public abstract class MovableObject extends GameObject {
     private final MovementConstants movementConstants;
     private double xSpeed;
@@ -33,7 +36,15 @@ public abstract class MovableObject extends GameObject {
         regulateSpeed();
         x += xSpeed;
         y += ySpeed;
+        checkBoundaries();
         decaySpeed();
+    }
+
+    private void checkBoundaries() {
+        if (x < 0) x = 0;
+        if (y < 0) y = 0;
+        if (x > WINDOW_WIDTH) x = WINDOW_WIDTH;
+        if (y > WINDOW_HEIGHT) y = WINDOW_HEIGHT;
     }
 
     public void accelerate(double xAcceleration, double yAcceleration) {
