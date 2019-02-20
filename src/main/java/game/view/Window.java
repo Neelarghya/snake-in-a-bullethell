@@ -15,10 +15,11 @@ public class Window extends Canvas {
     }
 
     private void setupFrame(int width, int height, Game game) {
-        frame.setPreferredSize(new Dimension(width, height));
-        frame.setMaximumSize(new Dimension(width, height));
-        frame.setMinimumSize(new Dimension(width, height));
+        frame.getContentPane().setPreferredSize(new Dimension(width, height));
+        frame.getContentPane().setMaximumSize(new Dimension(width, height));
+        frame.getContentPane().setMinimumSize(new Dimension(width, height));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.add(game);
