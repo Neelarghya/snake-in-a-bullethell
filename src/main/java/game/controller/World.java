@@ -30,7 +30,8 @@ class World {
 
     private void build(Handler handler, HeadsUpDisplay headsUpDisplay) {
         addPlayer(handler, headsUpDisplay);
-        for (int i = 0; i < 6; i++) {
+        int numberOfEnemies = random.nextInt(5) + 5;
+        for (int i = 0; i < numberOfEnemies; i++) {
             addRandomEnemy(handler);
         }
     }
@@ -60,7 +61,7 @@ class World {
     private void addTrail(Handler handler, Player player) {
         Trail trail = new Trail(player);
         trail.build(7, 40, 5, 8);
-        trail.addCollision(handler, ENEMY, player::takeDamage, Color.MAGENTA);
+        trail.addCollision(handler, ENEMY, player::takeDamage, Color.RED);
         handler.addObject(trail);
     }
 
