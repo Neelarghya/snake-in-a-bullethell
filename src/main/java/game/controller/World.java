@@ -27,6 +27,13 @@ class World {
 
     private void build(Handler handler) {
         addPlayer(handler);
+        addRandomEnemy(handler);
+        addRandomEnemy(handler);
+        addRandomEnemy(handler);
+        addRandomEnemy(handler);
+    }
+
+    private void addRandomEnemy(Handler handler) {
         handler.addObject(new Enemy(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT)));
     }
 
