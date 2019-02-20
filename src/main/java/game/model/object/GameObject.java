@@ -5,8 +5,8 @@ import java.awt.*;
 public abstract class GameObject {
     protected double x;
     protected double y;
-    private final int width;
-    private final int height;
+    protected final int width;
+    protected final int height;
     private ObjectType type;
 
     protected GameObject(double x, double y, int width, int height, ObjectType type) {
@@ -44,5 +44,13 @@ public abstract class GameObject {
         Rectangle otherRectangle = new Rectangle((int) otherX, (int) otherY, other.width, other.height);
 
         return thisRectangle.intersects(otherRectangle);
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

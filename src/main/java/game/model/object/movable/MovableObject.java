@@ -40,10 +40,13 @@ public abstract class MovableObject extends GameObject {
     }
 
     private void checkBoundaries() {
-        if (x < 0) x = 0;
-        if (y < 0) y = 0;
-        if (x > WINDOW_WIDTH) x = WINDOW_WIDTH;
-        if (y > WINDOW_HEIGHT) y = WINDOW_HEIGHT;
+        double halfWidth = width / 2.0;
+        double halfHeight = height / 2.0;
+
+        if (x < halfWidth) x = halfWidth;
+        if (y < halfHeight) y = halfHeight;
+        if (x > WINDOW_WIDTH - halfWidth) x = WINDOW_WIDTH - halfWidth;
+        if (y > WINDOW_HEIGHT - halfHeight) y = WINDOW_HEIGHT - halfHeight;
     }
 
     private void moveAsParSpeed() {

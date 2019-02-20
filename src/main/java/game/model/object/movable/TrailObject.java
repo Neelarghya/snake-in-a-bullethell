@@ -21,7 +21,7 @@ public class TrailObject extends MovableObject {
     @Override
     public void tick() {
         super.tick();
-        if (new Random().nextInt(10) < 3) reSetColor();
+        if (new Random().nextInt(20) < 3) reSetColor();
     }
 
     @Override
@@ -30,11 +30,11 @@ public class TrailObject extends MovableObject {
         graphics.fillRect((int) Math.round(x - WIDTH / 2.0), (int) Math.round(y - HEIGHT / 2.0), WIDTH, HEIGHT);
     }
 
-    public void setColor(Color color) {
+    void setColor(Color color) {
         this.color = color;
     }
 
-    public void reSetColor() {
+    private void reSetColor() {
         this.color = originalColor;
     }
 }

@@ -15,9 +15,10 @@ public class Rebound extends Movement {
         double x = object.getX();
         double y = object.getY();
 
-        if (x <= 0 || x >= WINDOW_WIDTH) object.reboundX();
-        if (y <= 0 || y >= WINDOW_HEIGHT){
-            object.reboundY();
-        }
+        double halfWidth = object.getWidth() / 2.0;
+        double halfHeight = object.getHeight() / 2.0;
+
+        if (x <= halfWidth || x >= WINDOW_WIDTH - halfWidth) object.reboundX();
+        if (y <= halfHeight || y >= WINDOW_HEIGHT - halfHeight) object.reboundY();
     }
 }
