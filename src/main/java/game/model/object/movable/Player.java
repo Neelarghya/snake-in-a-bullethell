@@ -6,8 +6,8 @@ import game.model.object.ObjectType;
 import java.awt.*;
 
 public class Player extends MovableObject {
-    private final int WIDTH = 40;
-    private final int HEIGHT = 40;
+    private static final int WIDTH = 40;
+    private static final int HEIGHT = 40;
 
     public Player(double x, double y) {
         super(x, y, ObjectType.PLAYER, new MovementConstants(3, 3, 8, .94));

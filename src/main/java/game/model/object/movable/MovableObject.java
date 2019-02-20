@@ -72,4 +72,12 @@ public abstract class MovableObject extends GameObject {
     public MovementConstants getMovementConstants() {
         return movementConstants;
     }
+
+    public void reboundX() {
+        xSpeed *= -1;
+    }
+
+    public void reboundY() {
+        ySpeed *= -1;
+    }
 }

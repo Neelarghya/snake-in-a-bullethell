@@ -6,8 +6,8 @@ import game.model.object.ObjectType;
 import java.awt.*;
 
 public class TrailObject extends MovableObject {
-    private final int WIDTH = 32;
-    private final int HEIGHT = 32;
+    private static final int WIDTH = 32;
+    private static final int HEIGHT = 32;
 
     TrailObject(double x, double y, MovementConstants movementConstants) {
         super(x, y, ObjectType.TRAIL_OBJECT, movementConstants);
