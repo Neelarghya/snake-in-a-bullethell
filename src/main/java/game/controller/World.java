@@ -27,11 +27,9 @@ class World {
 
     private void build(Handler handler) {
         addPlayer(handler);
-        addRandomEnemy(handler);
-        addRandomEnemy(handler);
-        addRandomEnemy(handler);
-        addRandomEnemy(handler);
-        addRandomEnemy(handler);
+        for (int i = 0; i < 6; i++) {
+            addRandomEnemy(handler);
+        }
     }
 
     private void addRandomEnemy(Handler handler) {
