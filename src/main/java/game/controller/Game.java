@@ -72,6 +72,10 @@ public class Game extends Canvas implements Runnable {
         stop();
     }
 
+    private void tick() {
+        world.tick();
+    }
+
     private void render() {
         BufferStrategy bufferStrategy = this.getBufferStrategy();
         if (null == bufferStrategy) {
@@ -89,9 +93,5 @@ public class Game extends Canvas implements Runnable {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         world.render(graphics);
-    }
-
-    private void tick() {
-        world.tick();
     }
 }
