@@ -3,6 +3,7 @@ package game.controller;
 import game.input.KeyInput;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
 import game.model.object.Handler;
+import game.model.object.movable.Enemy;
 import game.model.object.movable.Player;
 import game.model.object.movable.Trail;
 
@@ -26,6 +27,7 @@ class World {
 
     private void build(Handler handler) {
         addPlayer(handler);
+        handler.addObject(new Enemy(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT)));
     }
 
     private void addPlayer(Handler handler) {

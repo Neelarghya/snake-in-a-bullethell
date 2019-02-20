@@ -13,8 +13,8 @@ import static game.common.Constant.WINDOW_WIDTH;
 
 public abstract class MovableObject extends GameObject {
     private final MovementConstants movementConstants;
-    private double xSpeed;
-    private double ySpeed;
+    protected double xSpeed;
+    protected double ySpeed;
 
     private List<Behaviour> behaviours;
 
@@ -34,8 +34,7 @@ public abstract class MovableObject extends GameObject {
     private void move() {
         behaviours.forEach(Behaviour::behave);
         regulateSpeed();
-        x += xSpeed;
-        y += ySpeed;
+        moveAsParSpeed();
         checkBoundaries();
         decaySpeed();
     }
@@ -45,6 +44,11 @@ public abstract class MovableObject extends GameObject {
         if (y < 0) y = 0;
         if (x > WINDOW_WIDTH) x = WINDOW_WIDTH;
         if (y > WINDOW_HEIGHT) y = WINDOW_HEIGHT;
+    }
+
+    private void moveAsParSpeed() {
+        x += xSpeed;
+        y += ySpeed;
     }
 
     public void accelerate(double xAcceleration, double yAcceleration) {

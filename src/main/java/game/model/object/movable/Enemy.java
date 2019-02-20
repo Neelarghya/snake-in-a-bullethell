@@ -4,6 +4,7 @@ import game.model.MovementConstants;
 import game.model.behaviour.movement.Rebound;
 
 import java.awt.*;
+import java.util.Random;
 
 import static game.model.object.ObjectType.ENEMY;
 
@@ -11,8 +12,11 @@ public class Enemy extends MovableObject {
     private static final int WIDTH = 20;
     private static final int HEIGHT = 20;
 
-    Enemy(double x, double y, MovementConstants movementConstants) {
-        super(x, y, ENEMY, movementConstants);
+    public Enemy(double x, double y) {
+        super(x, y, ENEMY, new MovementConstants(3, 3, 6, 1));
+        Random random = new Random();
+        xSpeed = random.nextDouble() * getMovementConstants().getMaxSpeed();
+        ySpeed = random.nextDouble() * getMovementConstants().getMaxSpeed();
         this.addBehaviour(new Rebound(this));
     }
 
