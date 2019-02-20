@@ -14,7 +14,7 @@ public class HeadsUpDisplay implements Observer {
     private static final int X_OFFSET = 30;
     private static final int Y_OFFSET = 30;
 
-    private int playerHealth;
+    private double playerHealth;
     private int width;
 
     public HeadsUpDisplay() {
@@ -23,7 +23,7 @@ public class HeadsUpDisplay implements Observer {
     }
 
     public void tick() {
-        width = (int) (playerHealth / 100.0 * MAX_WIDTH);
+        width = (int) (playerHealth / 100 * MAX_WIDTH);
     }
 
     public void render(Graphics graphics) {

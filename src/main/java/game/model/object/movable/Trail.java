@@ -1,8 +1,12 @@
 package game.model.object.movable;
 
+import game.common.Action;
 import game.model.MovementConstants;
+import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.Follow;
 import game.model.object.GameObject;
+import game.model.object.Handler;
+import game.model.object.ObjectType;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -40,6 +44,18 @@ public class Trail extends GameObject {
     private double calculatePercentage(double maximum, double percentage) {
         double variable = maximum * RATIO;
         return (percentage) * variable + (maximum - variable);
+    }
+
+    public void addCollision(Handler handler, ObjectType type, Action action) {
+        trail.forEach(trailObject -> {
+            Collision collision = new Collision(trailObject, handler, type) {
+                @Override
+                protected void onCollide() {
+                    action.act();
+                }
+            };
+            trailObject.addBehaviour(collision);
+        });
     }
 
     @Override

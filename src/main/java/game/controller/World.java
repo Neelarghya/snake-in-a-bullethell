@@ -3,11 +3,11 @@ package game.controller;
 import game.input.KeyInput;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
-import game.view.ui.HeadsUpDisplay;
 import game.model.object.Handler;
 import game.model.object.movable.Enemy;
 import game.model.object.movable.Player;
 import game.model.object.movable.Trail;
+import game.view.ui.HeadsUpDisplay;
 
 import java.awt.*;
 import java.util.Random;
@@ -42,7 +42,7 @@ class World {
     private void addPlayer(Handler handler, HeadsUpDisplay headsUpDisplay) {
         Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT));
         MacroKeyMovementBehaviour macroKeyMovementBehaviour = new MacroKeyMovementBehaviour(player);
-        Collision collision = new Collision(player, handler, ENEMY) {
+        Collision collisionForPlayer = new Collision(player, handler, ENEMY) {
             @Override
             protected void onCollide() {
                 player.takeDamage();
@@ -50,12 +50,13 @@ class World {
         };
         keyInput.addBehaviour(macroKeyMovementBehaviour);
         player.addBehaviour(macroKeyMovementBehaviour);
-        player.addBehaviour(collision);
+        player.addBehaviour(collisionForPlayer);
         player.addObserver(headsUpDisplay);
-
         handler.addObject(player);
+
         Trail trail = new Trail(player);
         trail.build(7, 40, 5, 8);
+        trail.addCollision(handler, ENEMY, player::takeDamage);
         handler.addObject(trail);
     }
 
