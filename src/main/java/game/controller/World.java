@@ -54,6 +54,10 @@ class World {
         player.addObserver(headsUpDisplay);
         handler.addObject(player);
 
+        addTrail(handler, player);
+    }
+
+    private void addTrail(Handler handler, Player player) {
         Trail trail = new Trail(player);
         trail.build(7, 40, 5, 8);
         trail.addCollision(handler, ENEMY, player::takeDamage);
