@@ -14,12 +14,13 @@ import static game.model.object.ObjectType.PLAYER;
 public class Player extends MovableObject implements Observable {
     private static final int WIDTH = 40;
     private static final int HEIGHT = 40;
+    private static final int DAMAGE_TAKEN_PER_HIT = 2;
 
     private final List<Observer> observers;
     private int health;
 
     public Player(double x, double y) {
-        super(x, y, PLAYER, new MovementConstants(3, 3, 8, .94));
+        super(x, y, WIDTH, HEIGHT, PLAYER, new MovementConstants(3, 3, 8, .94));
         health = 100;
         observers = new ArrayList<>();
     }
@@ -58,5 +59,11 @@ public class Player extends MovableObject implements Observable {
     @Override
     public ObjectType is() {
         return PLAYER;
+    }
+
+    public void takeDamage() {
+        health = health > 0 ? health - DAMAGE_TAKEN_PER_HIT : 0;
+        System.out.println("Health : " + health);
+        notifyObservers();
     }
 }

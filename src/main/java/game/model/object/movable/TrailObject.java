@@ -10,7 +10,7 @@ public class TrailObject extends MovableObject {
     private static final int HEIGHT = 32;
 
     TrailObject(double x, double y, MovementConstants movementConstants) {
-        super(x, y, ObjectType.TRAIL_OBJECT, movementConstants);
+        super(x, y, WIDTH, HEIGHT, ObjectType.TRAIL_OBJECT, movementConstants);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package game.controller;
 
 import game.input.KeyInput;
+import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
 import game.view.ui.HeadsUpDisplay;
 import game.model.object.Handler;
@@ -13,6 +14,7 @@ import java.util.Random;
 
 import static game.common.Constant.WINDOW_HEIGHT;
 import static game.common.Constant.WINDOW_WIDTH;
+import static game.model.object.ObjectType.ENEMY;
 
 class World {
     private Handler handler;
@@ -40,8 +42,15 @@ class World {
     private void addPlayer(Handler handler, HeadsUpDisplay headsUpDisplay) {
         Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT));
         MacroKeyMovementBehaviour macroKeyMovementBehaviour = new MacroKeyMovementBehaviour(player);
+        Collision collision = new Collision(player, handler, ENEMY) {
+            @Override
+            protected void onCollide() {
+                player.takeDamage();
+            }
+        };
         keyInput.addBehaviour(macroKeyMovementBehaviour);
         player.addBehaviour(macroKeyMovementBehaviour);
+        player.addBehaviour(collision);
         player.addObserver(headsUpDisplay);
 
         handler.addObject(player);

@@ -18,8 +18,8 @@ public abstract class MovableObject extends GameObject {
 
     private List<Behaviour> behaviours;
 
-    MovableObject(double x, double y, ObjectType type, MovementConstants movementConstants) {
-        super(x, y, type);
+    MovableObject(double x, double y, int width, int height, ObjectType type, MovementConstants movementConstants) {
+        super(x, y, width, height, type);
         behaviours = new ArrayList<>();
         this.movementConstants = movementConstants;
         xSpeed = 0;

@@ -16,7 +16,7 @@ public class Trail extends GameObject {
     private final GameObject target;
 
     public Trail(GameObject target) {
-        super(target.getX(), target.getY(), TRAIL);
+        super(target.getX(), target.getY(), 0, 0, TRAIL);
         this.target = target;
         trail = new ArrayList<>();
     }

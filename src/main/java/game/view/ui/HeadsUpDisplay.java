@@ -23,7 +23,7 @@ public class HeadsUpDisplay implements Observer {
     }
 
     public void tick() {
-        width = playerHealth / 100 * MAX_WIDTH;
+        width = (int) (playerHealth / 100.0 * MAX_WIDTH);
     }
 
     public void render(Graphics graphics) {

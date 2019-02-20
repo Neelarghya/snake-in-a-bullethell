@@ -14,7 +14,7 @@ public class Enemy extends MovableObject {
     private static final int MINIMUM_SPEED = 1;
 
     public Enemy(double x, double y) {
-        super(x, y, ENEMY, new MovementConstants(3, 3, 6, 1));
+        super(x, y, WIDTH, HEIGHT, ENEMY, new MovementConstants(3, 3, 6, 1));
         Random random = new Random();
         xSpeed = random.nextDouble() * (getMovementConstants().getMaxSpeed() - MINIMUM_SPEED) + MINIMUM_SPEED;
         ySpeed = random.nextDouble() * (getMovementConstants().getMaxSpeed() - MINIMUM_SPEED) + MINIMUM_SPEED;
