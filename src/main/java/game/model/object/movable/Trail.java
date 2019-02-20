@@ -46,12 +46,13 @@ public class Trail extends GameObject {
         return (percentage) * variable + (maximum - variable);
     }
 
-    public void addCollision(Handler handler, ObjectType type, Action action) {
+    public void addCollision(Handler handler, ObjectType type, Action action, Color collisionColor) {
         trail.forEach(trailObject -> {
             Collision collision = new Collision(trailObject, handler, type) {
                 @Override
                 protected void onCollide() {
                     action.act();
+                    if (collisionColor != null) trailObject.setColor(collisionColor);
                 }
             };
             trailObject.addBehaviour(collision);

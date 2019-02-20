@@ -60,7 +60,7 @@ class World {
     private void addTrail(Handler handler, Player player) {
         Trail trail = new Trail(player);
         trail.build(7, 40, 5, 8);
-        trail.addCollision(handler, ENEMY, player::takeDamage);
+        trail.addCollision(handler, ENEMY, player::takeDamage, Color.MAGENTA);
         handler.addObject(trail);
     }
 
