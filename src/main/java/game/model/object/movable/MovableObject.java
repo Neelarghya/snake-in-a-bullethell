@@ -36,7 +36,7 @@ public abstract class MovableObject extends GameObject {
         decaySpeed();
     }
 
-    public void accelerate(double xAcceleration, double yAcceleration){
+    public void accelerate(double xAcceleration, double yAcceleration) {
         xSpeed += xAcceleration;
         ySpeed += yAcceleration;
     }
@@ -54,7 +54,7 @@ public abstract class MovableObject extends GameObject {
         ySpeed *= movementConstants.getFriction();
     }
 
-    public void addBehaviour(Behaviour behaviour){
+    public void addBehaviour(Behaviour behaviour) {
         behaviours.add(behaviour);
     }
 

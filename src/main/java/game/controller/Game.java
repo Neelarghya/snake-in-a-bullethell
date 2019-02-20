@@ -11,14 +11,15 @@ import static game.common.Constant.*;
 
 public class Game extends Canvas implements Runnable {
     private Thread thread;
-    private boolean running;
+    private KeyInput keyInput;
     private World world;
+    private boolean running;
 
-    public Game(Handler handler) {
+    public Game(KeyInput keyInput, Handler handler) {
+        this.keyInput = keyInput;
         running = false;
-        KeyInput keyInput = new KeyInput();
-        world = new World(handler, keyInput);
-        this.addKeyListener(keyInput);
+        world = new World(handler, this.keyInput);
+        this.addKeyListener(this.keyInput);
         new Window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, this);
     }
 
