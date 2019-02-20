@@ -1,16 +1,14 @@
-package game.model.object.ui;
+package game.view.ui;
 
-import game.model.object.GameObject;
-import game.model.object.Observable;
-import game.model.object.Observer;
+import game.common.Observable;
+import game.common.Observer;
 import game.model.object.movable.Player;
 
 import java.awt.*;
 
-import static game.model.object.ObjectType.HUD;
 import static game.model.object.ObjectType.PLAYER;
 
-public class HeadsUpDisplay extends GameObject implements Observer {
+public class HeadsUpDisplay implements Observer {
     private static final int MAX_WIDTH = 100;
     private static final int HEIGHT = 30;
     private static final int X_OFFSET = 30;
@@ -20,7 +18,6 @@ public class HeadsUpDisplay extends GameObject implements Observer {
     private int width;
 
     public HeadsUpDisplay() {
-        super(X_OFFSET, Y_OFFSET, HUD);
         this.width = 0;
         this.playerHealth = 0;
     }
@@ -36,7 +33,7 @@ public class HeadsUpDisplay extends GameObject implements Observer {
 
     @Override
     public void update(Observable observable) {
-        if(observable.is() == PLAYER) {
+        if (observable.is() == PLAYER) {
             playerHealth = ((Player) observable).getHealth();
         }
     }

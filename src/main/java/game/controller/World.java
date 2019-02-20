@@ -2,7 +2,7 @@ package game.controller;
 
 import game.input.KeyInput;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
-import game.model.object.ui.HeadsUpDisplay;
+import game.view.ui.HeadsUpDisplay;
 import game.model.object.Handler;
 import game.model.object.movable.Enemy;
 import game.model.object.movable.Player;
@@ -31,7 +31,6 @@ class World {
         for (int i = 0; i < 6; i++) {
             addRandomEnemy(handler);
         }
-        handler.addObject(headsUpDisplay);
     }
 
     private void addRandomEnemy(Handler handler) {

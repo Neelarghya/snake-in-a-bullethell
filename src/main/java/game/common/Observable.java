@@ -1,4 +1,6 @@
-package game.model.object;
+package game.common;
+
+import game.model.object.ObjectType;
 
 public interface Observable {
     void addObserver(Observer observer);

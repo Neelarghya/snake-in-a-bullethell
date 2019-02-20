@@ -2,8 +2,8 @@ package game.model.object.movable;
 
 import game.model.MovementConstants;
 import game.model.object.ObjectType;
-import game.model.object.Observable;
-import game.model.object.Observer;
+import game.common.Observable;
+import game.common.Observer;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package game.controller;
 
 import game.input.KeyInput;
-import game.model.object.ui.HeadsUpDisplay;
+import game.view.ui.HeadsUpDisplay;
 import game.model.object.Handler;
 import game.view.Window;
 
@@ -75,6 +75,7 @@ public class Game extends Canvas implements Runnable {
 
     private void tick() {
         world.tick();
+        headsUpDisplay.tick();
     }
 
     private void render() {
@@ -94,5 +95,6 @@ public class Game extends Canvas implements Runnable {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         world.render(graphics);
+        headsUpDisplay.render(graphics);
     }
 }

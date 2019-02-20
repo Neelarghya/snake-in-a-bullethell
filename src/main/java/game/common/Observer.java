@@ -1,4 +1,4 @@
-package game.model.object;
+package game.common;
 
 public interface Observer {
     void update(Observable observable);
