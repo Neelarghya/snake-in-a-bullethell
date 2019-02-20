@@ -20,7 +20,7 @@ public class TrailObject extends MovableObject {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.RED);
+        graphics.setColor(Color.BLUE);
         graphics.fillRect((int) Math.round(x - WIDTH / 2.0), (int) Math.round(y - HEIGHT / 2.0), WIDTH, HEIGHT);
     }
 }

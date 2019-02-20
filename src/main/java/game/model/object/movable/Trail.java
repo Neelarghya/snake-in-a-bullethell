@@ -11,7 +11,7 @@ import java.util.List;
 import static game.model.object.ObjectType.TRAIL;
 
 public class Trail extends GameObject {
-    private static final double RATIO = 0.25;
+    private static final double RATIO = 0.1;
     private final List<TrailObject> trail;
     private final GameObject target;
 

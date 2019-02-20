@@ -22,9 +22,7 @@ public class Enemy extends MovableObject {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.BLUE);
+        graphics.setColor(Color.RED);
         graphics.fillRect((int) Math.round(x - WIDTH / 2.0), (int) Math.round(y - HEIGHT / 2.0), WIDTH, HEIGHT);
-        graphics.setColor(Color.WHITE);
-        graphics.fillRect((int) Math.round(x - 1), (int) Math.round(y - 1), 2, 2);
     }
 }

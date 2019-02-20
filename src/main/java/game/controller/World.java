@@ -31,6 +31,7 @@ class World {
         addRandomEnemy(handler);
         addRandomEnemy(handler);
         addRandomEnemy(handler);
+        addRandomEnemy(handler);
     }
 
     private void addRandomEnemy(Handler handler) {
@@ -45,7 +46,7 @@ class World {
 
         handler.addObject(player);
         Trail trail = new Trail(player);
-        trail.build(10, 35, 4, 8);
+        trail.build(7, 40, 5, 8);
         handler.addObject(trail);
     }
 
