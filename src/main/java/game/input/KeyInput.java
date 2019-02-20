@@ -23,10 +23,10 @@ public class KeyInput extends KeyAdapter {
         int key = e.getKeyCode();
 
         for (MacroKeyMovementBehaviour behaviour : behaviours) {
-            if (key == KeyEvent.VK_W) behaviour.moveUp();
-            if (key == KeyEvent.VK_A) behaviour.moveLeft();
-            if (key == KeyEvent.VK_S) behaviour.moveDown();
-            if (key == KeyEvent.VK_D) behaviour.moveRight();
+            if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) behaviour.moveUp();
+            if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) behaviour.moveLeft();
+            if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) behaviour.moveDown();
+            if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) behaviour.moveRight();
         }
     }
 
@@ -35,10 +35,11 @@ public class KeyInput extends KeyAdapter {
         int key = e.getKeyCode();
 
         for (MacroKeyMovementBehaviour behaviour : behaviours) {
-            if (key == KeyEvent.VK_W) behaviour.stopMovingUp();
-            if (key == KeyEvent.VK_A) behaviour.stopMovingLeft();
-            if (key == KeyEvent.VK_S) behaviour.stopMovingDown();
-            if (key == KeyEvent.VK_D) behaviour.stopMovingRight();
+            if (key == KeyEvent.VK_W || key == KeyEvent.VK_UP) behaviour.stopMovingUp();
+            if (key == KeyEvent.VK_A || key == KeyEvent.VK_LEFT) behaviour.stopMovingLeft();
+            if (key == KeyEvent.VK_S || key == KeyEvent.VK_DOWN) behaviour.stopMovingDown();
+            if (key == KeyEvent.VK_D || key == KeyEvent.VK_RIGHT) behaviour.stopMovingRight();
+            if (key == KeyEvent.VK_ESCAPE) System.exit(1);
         }
     }
 }
