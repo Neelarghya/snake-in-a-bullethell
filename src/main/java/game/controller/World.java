@@ -1,6 +1,6 @@
 package game.controller;
 
-import game.input.KeyInput;
+import game.input.MovementKeyInput;
 import game.model.behaviour.visual.ResetColor;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
@@ -19,12 +19,12 @@ import static game.model.object.ObjectType.ENEMY;
 
 class World {
     private Handler handler;
-    private KeyInput keyInput;
+    private MovementKeyInput movementKeyInput;
     private Random random;
 
-    World(Handler handler, KeyInput keyInput, HeadsUpDisplay headsUpDisplay) {
+    World(Handler handler, MovementKeyInput movementKeyInput, HeadsUpDisplay headsUpDisplay) {
         this.handler = handler;
-        this.keyInput = keyInput;
+        this.movementKeyInput = movementKeyInput;
         this.random = new Random();
         build(handler, headsUpDisplay);
     }
@@ -52,7 +52,7 @@ class World {
                 resetColor.setColor(Color.RED);
             }
         };
-        keyInput.addBehaviour(macroKeyMovementBehaviour);
+        movementKeyInput.addBehaviour(macroKeyMovementBehaviour);
         player.addBehaviour(macroKeyMovementBehaviour);
         player.addBehaviour(collisionForPlayer);
         player.addBehaviour(resetColor);

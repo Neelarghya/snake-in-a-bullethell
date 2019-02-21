@@ -1,6 +1,7 @@
 package game.controller;
 
-import game.input.KeyInput;
+import game.input.GameKeyInput;
+import game.input.MovementKeyInput;
 import game.model.object.Handler;
 import game.view.Window;
 import game.view.ui.HeadsUpDisplay;
@@ -15,14 +16,19 @@ public class Game extends Canvas implements Runnable {
     private World world;
     private boolean running;
     private HeadsUpDisplay headsUpDisplay;
+    private boolean closed = false;
+    private Window window;
 
-    public Game(KeyInput keyInput, Handler handler) {
+    public Game(GameKeyInput gameKeyInput, MovementKeyInput movementKeyInput, Handler handler) {
         headsUpDisplay = new HeadsUpDisplay();
-        headsUpDisplay.addObserver(observable -> running = false);
+        headsUpDisplay.addObserver(observable -> close());
         running = false;
-        world = new World(handler, keyInput, headsUpDisplay);
-        this.addKeyListener(keyInput);
-        new Window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, this);
+        world = new World(handler, movementKeyInput, headsUpDisplay);
+        gameKeyInput.setTogglePauseAction(this::togglePause);
+        gameKeyInput.setCloseAction(this::close);
+        this.addKeyListener(movementKeyInput);
+        this.addKeyListener(gameKeyInput);
+        window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, this);
     }
 
     public synchronized void start() {
@@ -33,8 +39,9 @@ public class Game extends Canvas implements Runnable {
 
     private synchronized void stop() {
         try {
-            thread.join();
+            window.close();
             running = false;
+            thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -43,7 +50,10 @@ public class Game extends Canvas implements Runnable {
     @Override
     public void run() {
         this.requestFocus();
-        runGameLoop();
+        while (!closed) {
+            runGameLoop();
+        }
+        stop();
     }
 
     private void runGameLoop() {
@@ -53,7 +63,7 @@ public class Game extends Canvas implements Runnable {
         double delta = 0;
         long timer = System.currentTimeMillis();
 
-        while (running) {
+        while (!closed && running) {
             long now = System.nanoTime();
             delta += (now - lastTime) / nanoSecondsPerFrame;
             lastTime = now;
@@ -68,8 +78,8 @@ public class Game extends Canvas implements Runnable {
                 timer += 1000;
             }
         }
-        stop();
     }
+
 
     private void tick() {
         world.tick();
@@ -94,5 +104,13 @@ public class Game extends Canvas implements Runnable {
         graphics.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
         world.render(graphics);
         headsUpDisplay.render(graphics);
+    }
+
+    private void togglePause() {
+        running = !running;
+    }
+
+    private void close() {
+        closed = true;
     }
 }
