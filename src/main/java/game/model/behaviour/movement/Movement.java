@@ -1,7 +1,7 @@
 package game.model.behaviour.movement;
 
 import game.model.behaviour.Behaviour;
-import game.model.object.movable.MovableObject;
+import game.model.object.behavingobject.movable.MovableObject;
 
 public abstract class Movement implements Behaviour {
 

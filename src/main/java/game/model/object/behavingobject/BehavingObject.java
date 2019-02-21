@@ -1,6 +1,8 @@
-package game.model.object;
+package game.model.object.behavingobject;
 
 import game.model.behaviour.Behaviour;
+import game.model.object.GameObject;
+import game.model.object.ObjectType;
 
 import java.util.ArrayList;
 import java.util.List;

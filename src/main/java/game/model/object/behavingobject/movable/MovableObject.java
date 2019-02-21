@@ -1,7 +1,7 @@
-package game.model.object.movable;
+package game.model.object.behavingobject.movable;
 
 import game.model.MovementConstants;
-import game.model.object.BehavingObject;
+import game.model.object.behavingobject.BehavingObject;
 import game.model.object.ObjectType;
 
 import static game.common.Constant.WINDOW_HEIGHT;

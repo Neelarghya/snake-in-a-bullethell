@@ -1,4 +1,4 @@
-package game.model.object.movable;
+package game.model.object.behavingobject.movable;
 
 import game.model.MovementConstants;
 import game.model.behaviour.movement.Rebound;

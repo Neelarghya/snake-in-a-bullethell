@@ -1,4 +1,4 @@
-package game.model.object;
+package game.model.object.behavingobject;
 
 import java.awt.*;
 

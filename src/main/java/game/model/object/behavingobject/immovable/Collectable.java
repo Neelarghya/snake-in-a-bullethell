@@ -1,6 +1,6 @@
-package game.model.object.immovable;
+package game.model.object.behavingobject.immovable;
 
-import game.model.object.BehavingObject;
+import game.model.object.behavingobject.BehavingObject;
 
 import static game.model.object.ObjectType.COLLECTABLE;
 

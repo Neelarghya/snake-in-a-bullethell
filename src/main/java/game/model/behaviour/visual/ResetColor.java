@@ -1,7 +1,7 @@
 package game.model.behaviour.visual;
 
 import game.model.behaviour.Behaviour;
-import game.model.object.ColorResettable;
+import game.model.object.behavingobject.ColorResettable;
 
 import java.awt.*;
 

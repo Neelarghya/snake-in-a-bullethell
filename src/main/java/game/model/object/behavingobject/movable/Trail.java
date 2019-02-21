@@ -1,4 +1,4 @@
-package game.model.object.movable;
+package game.model.object.behavingobject.movable;
 
 import game.common.Action;
 import game.model.MovementConstants;

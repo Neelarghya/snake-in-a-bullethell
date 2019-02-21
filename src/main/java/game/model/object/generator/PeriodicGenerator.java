@@ -1,4 +1,6 @@
-package game.model.object;
+package game.model.object.generator;
+
+import game.model.object.Handler;
 
 import java.util.Random;
 

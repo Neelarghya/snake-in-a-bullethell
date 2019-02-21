@@ -1,7 +1,7 @@
-package game.model.object.movable;
+package game.model.object.behavingobject.movable;
 
 import game.model.MovementConstants;
-import game.model.object.ColorResettable;
+import game.model.object.behavingobject.ColorResettable;
 import game.model.object.ObjectType;
 
 import java.awt.*;

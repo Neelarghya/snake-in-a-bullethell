@@ -3,7 +3,7 @@ package game.view.ui.components;
 import game.common.Observable;
 import game.common.Observer;
 import game.model.object.ObjectType;
-import game.model.object.movable.Player;
+import game.model.object.behavingobject.movable.Player;
 
 import java.awt.*;
 import java.util.ArrayList;

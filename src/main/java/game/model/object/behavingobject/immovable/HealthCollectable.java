@@ -1,4 +1,4 @@
-package game.model.object.immovable;
+package game.model.object.behavingobject.immovable;
 
 import java.awt.*;
 
