@@ -75,7 +75,7 @@ public class Player extends MovableObject implements Observable, ColorResettable
     }
 
     private void die(){
-        System.out.println("You Dead!");
+        System.out.println("You're Dead!");
     }
 
     @Override
@@ -90,6 +90,7 @@ public class Player extends MovableObject implements Observable, ColorResettable
 
     public void gainHealth() {
         health += 10;
+        if (health > MAX_HEALTH) health = MAX_HEALTH;
         notifyObservers();
     }
 }

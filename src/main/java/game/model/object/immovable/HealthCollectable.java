@@ -1,7 +1,5 @@
 package game.model.object.immovable;
 
-import game.model.behaviour.collision.Collision;
-
 import java.awt.*;
 
 public class HealthCollectable extends Collectable {
