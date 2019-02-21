@@ -47,7 +47,7 @@ class World {
 
     private void addHealthCollectables(Handler handler, Player player) {
         GameObjectGenerator collectableGenerator = () -> {
-            Collectable collectable = new HealthCollectable(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT));
+            Collectable collectable = new HealthCollectable(16 + random.nextInt(WINDOW_WIDTH - 32), 16 + random.nextInt(WINDOW_HEIGHT - 32));
             Collision collision = new Collision(collectable, handler, PLAYER) {
                 @Override
                 protected void onCollide() {
