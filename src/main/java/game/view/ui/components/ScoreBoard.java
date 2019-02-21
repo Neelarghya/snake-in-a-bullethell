@@ -1,5 +1,7 @@
 package game.view.ui.components;
 
+import game.common.CustomColors;
+
 import java.awt.*;
 
 public class ScoreBoard implements HeadsUpDisplayComponent {
@@ -16,8 +18,8 @@ public class ScoreBoard implements HeadsUpDisplayComponent {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.WHITE);
-        graphics.setFont(new Font("TimesRoman", Font.BOLD, 20));
-        graphics.drawString(String.valueOf(score), 900, 40);
+        graphics.setColor(CustomColors.translucentWhite);
+        graphics.setFont(new Font("TimesRoman", Font.BOLD, 30));
+        graphics.drawString(String.valueOf(score), 850, 40);
     }
 }
