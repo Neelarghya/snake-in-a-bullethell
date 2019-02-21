@@ -33,10 +33,12 @@ public class HeadsUpDisplay implements Observer, Observable {
     }
 
     public void render(Graphics graphics) {
-        graphics.setColor(Color.GRAY);
+        Color translucentGrey = new Color(0.7f, 0.7f, 0.7f, .6f);
+        graphics.setColor(translucentGrey);
         graphics.fillRect(X_OFFSET, Y_OFFSET, MAX_WIDTH, HEIGHT);
 
-        graphics.setColor(Color.GREEN);
+        Color translucentGreen = new Color(0.0f, 1f, 0.0f, .5f);
+        graphics.setColor(translucentGreen);
         graphics.fillRect(X_OFFSET, Y_OFFSET, width, HEIGHT);
 
         graphics.setColor(Color.WHITE);
