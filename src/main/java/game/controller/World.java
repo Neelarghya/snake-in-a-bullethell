@@ -4,7 +4,9 @@ import game.input.MovementKeyInput;
 import game.model.behaviour.visual.ResetColor;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
+import game.model.object.GameObjectGenerator;
 import game.model.object.Handler;
+import game.model.object.PeriodicGenerator;
 import game.model.object.immovable.Collectable;
 import game.model.object.immovable.HealthCollectable;
 import game.model.object.movable.Enemy;
@@ -13,6 +15,8 @@ import game.model.object.movable.Trail;
 import game.view.ui.HeadsUpDisplay;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static game.common.Constant.WINDOW_HEIGHT;
@@ -24,11 +28,13 @@ class World {
     private Handler handler;
     private MovementKeyInput movementKeyInput;
     private Random random;
+    private List<PeriodicGenerator> periodicGenerators;
 
     World(Handler handler, MovementKeyInput movementKeyInput, HeadsUpDisplay headsUpDisplay) {
         this.handler = handler;
         this.movementKeyInput = movementKeyInput;
         this.random = new Random();
+        this.periodicGenerators = new ArrayList<>();
         build(handler, headsUpDisplay);
     }
 
@@ -39,21 +45,24 @@ class World {
             addRandomEnemy(handler);
         }
         addHealthCollectables(handler, player);
-        addHealthCollectables(handler, player);
-        addHealthCollectables(handler, player);
     }
 
     private void addHealthCollectables(Handler handler, Player player) {
-        Collectable collectable = new HealthCollectable(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT));
-        Collision collision = new Collision(collectable, handler, PLAYER) {
-            @Override
-            protected void onCollide() {
-                player.gainHealth();
-                handler.remove(collectable);
-            }
+        GameObjectGenerator collectableGenerator = () -> {
+            Collectable collectable = new HealthCollectable(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT));
+            Collision collision = new Collision(collectable, handler, PLAYER) {
+                @Override
+                protected void onCollide() {
+                    player.gainHealth();
+                    handler.remove(collectable);
+                }
+            };
+            collectable.addBehaviour(collision);
+            return collectable;
         };
-        collectable.addBehaviour(collision);
-        handler.addObject(collectable);
+
+        PeriodicGenerator healthCollectableGenerator = new PeriodicGenerator(3, 400, handler, collectableGenerator, true);
+        periodicGenerators.add(healthCollectableGenerator);
     }
 
     private void addRandomEnemy(Handler handler) {
@@ -91,6 +100,7 @@ class World {
 
     void tick() {
         handler.tick();
+        periodicGenerators.forEach(PeriodicGenerator::tick);
     }
 
     void render(Graphics graphics) {
