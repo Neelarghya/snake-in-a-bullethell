@@ -34,10 +34,10 @@ public abstract class GameObject {
     }
 
     public boolean isColliding(GameObject other) {
-        double thisX = this.x - width;
+        double thisX = this.x - width / 2.0;
         double otherX = other.x - other.width / 2.0;
 
-        double thisY = this.y - height;
+        double thisY = this.y - height / 2.0;
         double otherY = other.y - other.height / 2.0;
 
         Rectangle thisRectangle = new Rectangle((int) thisX, (int) thisY, width, height);
