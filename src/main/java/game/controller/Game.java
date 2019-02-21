@@ -21,10 +21,10 @@ public class Game extends Canvas implements Runnable {
     private boolean closed = false;
     private Window window;
 
-    public Game(GameKeyInput gameKeyInput, MovementKeyInput movementKeyInput, Handler handler) {
+    public Game(GameKeyInput gameKeyInput, MovementKeyInput movementKeyInput, Handler handler, HeadsUpDisplay headsUpDisplay) {
         running = false;
 
-        headsUpDisplay = new HeadsUpDisplay();
+        this.headsUpDisplay = headsUpDisplay;
         HealthBar healthBar = HUDSetup();
 
         world = new World(handler, movementKeyInput, healthBar);
@@ -65,7 +65,11 @@ public class Game extends Canvas implements Runnable {
     public void run() {
         this.requestFocus();
         while (!closed) {
-            runGameLoop();
+            if (null == this.getBufferStrategy()) {
+                this.createBufferStrategy(3);
+            } else {
+                runGameLoop();
+            }
         }
         stop();
     }
@@ -82,11 +86,13 @@ public class Game extends Canvas implements Runnable {
             delta += (now - lastTime) / nanoSecondsPerFrame;
             lastTime = now;
 
-            while (delta >= 1) {
+            while (delta >= 1 && delta < 10) {
                 tick();
                 render();
                 delta--;
             }
+
+            if (delta >= 10) delta = 0;
 
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
