@@ -3,6 +3,7 @@ package game.model.object.movable;
 import game.common.Observable;
 import game.common.Observer;
 import game.model.MovementConstants;
+import game.model.object.ColorResettable;
 import game.model.object.ObjectType;
 
 import java.awt.*;
@@ -11,18 +12,22 @@ import java.util.List;
 
 import static game.model.object.ObjectType.PLAYER;
 
-public class Player extends MovableObject implements Observable {
+public class Player extends MovableObject implements Observable, ColorResettable {
     private static final int WIDTH = 40;
     private static final int HEIGHT = 40;
     private static final double DAMAGE_TAKEN_PER_HIT = 0.5;
 
     private final List<Observer> observers;
     private double health;
+    private Color color;
+    private final Color originalColor;
 
-    public Player(double x, double y) {
+    public Player(double x, double y, Color originalColor) {
         super(x, y, WIDTH, HEIGHT, PLAYER, new MovementConstants(3, 3, 8, .94));
-        health = 100;
-        observers = new ArrayList<>();
+        this.originalColor = originalColor;
+        this.color = originalColor;
+        this.health = 100;
+        this.observers = new ArrayList<>();
     }
 
     @Override
@@ -32,7 +37,7 @@ public class Player extends MovableObject implements Observable {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.setColor(Color.BLUE);
+        graphics.setColor(color);
         graphics.fillRect((int) Math.round(x - WIDTH / 2.0), (int) Math.round(y - HEIGHT / 2.0), WIDTH, HEIGHT);
     }
 
@@ -70,6 +75,15 @@ public class Player extends MovableObject implements Observable {
 
     private void die(){
         System.out.println("You Dead!");
+    }
 
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    @Override
+    public void reSetColor() {
+        this.color = originalColor;
     }
 }

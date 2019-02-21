@@ -1,6 +1,7 @@
 package game.controller;
 
 import game.input.KeyInput;
+import game.model.behaviour.ResetColor;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
 import game.model.object.Handler;
@@ -41,17 +42,20 @@ class World {
     }
 
     private void addPlayer(Handler handler, HeadsUpDisplay headsUpDisplay) {
-        Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT));
+        Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT), Color.BLUE);
         MacroKeyMovementBehaviour macroKeyMovementBehaviour = new MacroKeyMovementBehaviour(player);
+        ResetColor resetColor = new ResetColor(player, 20);
         Collision collisionForPlayer = new Collision(player, handler, ENEMY) {
             @Override
             protected void onCollide() {
                 player.takeDamage();
+                resetColor.setColor(Color.RED);
             }
         };
         keyInput.addBehaviour(macroKeyMovementBehaviour);
         player.addBehaviour(macroKeyMovementBehaviour);
         player.addBehaviour(collisionForPlayer);
+        player.addBehaviour(resetColor);
         player.addObserver(headsUpDisplay);
         handler.addObject(player);
 
