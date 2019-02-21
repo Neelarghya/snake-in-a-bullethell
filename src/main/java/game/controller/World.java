@@ -57,14 +57,14 @@ class World {
         player.addBehaviour(collisionForPlayer);
         player.addBehaviour(resetColor);
         player.addObserver(headsUpDisplay);
-        handler.addObject(player);
 
         addTrail(handler, player);
+        handler.addObject(player);
     }
 
     private void addTrail(Handler handler, Player player) {
         Trail trail = new Trail(player);
-        trail.build(7, 40, 5, 8, Color.BLUE);
+        trail.build(6, 50, 6, 8, Color.BLUE);
         trail.addCollision(handler, ENEMY, player::takeDamage, Color.RED);
         handler.addObject(trail);
     }

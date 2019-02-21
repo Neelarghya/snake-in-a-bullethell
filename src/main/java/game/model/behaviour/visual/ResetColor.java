@@ -20,8 +20,7 @@ public class ResetColor implements Behaviour {
     public void behave() {
         if (setTimer >= 0) {
             setTimer--;
-            if (setTimer == 0)
-                object.reSetColor();
+            if (setTimer == 0) object.reSetColor();
         }
     }
 
