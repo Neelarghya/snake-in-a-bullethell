@@ -90,5 +90,6 @@ public class Player extends MovableObject implements Observable, ColorResettable
 
     public void gainHealth() {
         health += 10;
+        notifyObservers();
     }
 }
