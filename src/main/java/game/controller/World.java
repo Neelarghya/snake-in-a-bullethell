@@ -1,9 +1,9 @@
 package game.controller;
 
 import game.input.MovementKeyInput;
-import game.model.behaviour.visual.ResetColor;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
+import game.model.behaviour.visual.ResetColor;
 import game.model.object.GameObjectGenerator;
 import game.model.object.Handler;
 import game.model.object.PeriodicGenerator;
@@ -40,10 +40,8 @@ class World {
 
     private void build(Handler handler, HeadsUpDisplay headsUpDisplay) {
         Player player = addPlayer(handler, headsUpDisplay);
-        int numberOfEnemies = random.nextInt(5) + 5;
-        for (int i = 0; i < numberOfEnemies; i++) {
-            addRandomEnemy(handler);
-        }
+//        addAllRandomEnemy(handler);
+        periodicallyAddRandomEnemy(handler);
         addHealthCollectables(handler, player);
     }
 
@@ -65,8 +63,27 @@ class World {
         periodicGenerators.add(healthCollectableGenerator);
     }
 
-    private void addRandomEnemy(Handler handler) {
-        handler.addObject(new Enemy(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT)));
+    private void addAllRandomEnemy(Handler handler) {
+        int numberOfEnemies = random.nextInt(5) + 5;
+        for (int i = 0; i < numberOfEnemies; i++) {
+            handler.addObject(new Enemy(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT)));
+        }
+    }
+
+    private void periodicallyAddRandomEnemy(Handler handler) {
+        GameObjectGenerator enemyGenerator = () -> {
+            int expectedThickness = 10;
+            int x = expectedThickness + random.nextInt(1) * (WINDOW_WIDTH - expectedThickness);
+            int y = expectedThickness + random.nextInt(1) * (WINDOW_HEIGHT - expectedThickness);
+            if (random.nextBoolean()) {
+                x = random.nextInt(WINDOW_WIDTH);
+            } else {
+                y = random.nextInt(WINDOW_HEIGHT);
+            }
+            return new Enemy(x, y);
+        };
+        PeriodicGenerator periodicEnemyGenerator = new PeriodicGenerator(1, 500, handler, enemyGenerator, false);
+        periodicGenerators.add(periodicEnemyGenerator);
     }
 
     private Player addPlayer(Handler handler, HeadsUpDisplay headsUpDisplay) {
