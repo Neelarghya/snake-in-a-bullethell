@@ -5,6 +5,8 @@ import game.input.MovementKeyInput;
 import game.model.object.Handler;
 import game.view.Window;
 import game.view.ui.HeadsUpDisplay;
+import game.view.ui.components.HealthBar;
+import game.view.ui.components.ScoreBoard;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -15,20 +17,32 @@ public class Game extends Canvas implements Runnable {
     private Thread thread;
     private World world;
     private boolean running;
-    private HeadsUpDisplay headsUpDisplay;
+    private final HeadsUpDisplay headsUpDisplay;
     private boolean closed = false;
     private Window window;
 
     public Game(GameKeyInput gameKeyInput, MovementKeyInput movementKeyInput, Handler handler) {
-        headsUpDisplay = new HeadsUpDisplay();
-        headsUpDisplay.addObserver(observable -> close());
         running = false;
-        world = new World(handler, movementKeyInput, headsUpDisplay);
+
+        headsUpDisplay = new HeadsUpDisplay();
+        HealthBar healthBar = HUDSetup();
+
+        world = new World(handler, movementKeyInput, healthBar);
+
         gameKeyInput.setTogglePauseAction(this::togglePause);
         gameKeyInput.setCloseAction(this::close);
         this.addKeyListener(movementKeyInput);
         this.addKeyListener(gameKeyInput);
+
         window = new Window(WINDOW_WIDTH, WINDOW_HEIGHT, TITLE, this);
+    }
+
+    private HealthBar HUDSetup() {
+        HealthBar healthBar = new HealthBar();
+        healthBar.addObserver(observable -> close());
+        headsUpDisplay.addComponent(healthBar);
+        headsUpDisplay.addComponent(new ScoreBoard());
+        return healthBar;
     }
 
     public synchronized void start() {

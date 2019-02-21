@@ -12,7 +12,7 @@ import game.model.object.immovable.HealthCollectable;
 import game.model.object.movable.Enemy;
 import game.model.object.movable.Player;
 import game.model.object.movable.Trail;
-import game.view.ui.HeadsUpDisplay;
+import game.view.ui.components.HealthBar;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -30,16 +30,16 @@ class World {
     private Random random;
     private List<PeriodicGenerator> periodicGenerators;
 
-    World(Handler handler, MovementKeyInput movementKeyInput, HeadsUpDisplay headsUpDisplay) {
+    World(Handler handler, MovementKeyInput movementKeyInput, HealthBar healthBar) {
         this.handler = handler;
         this.movementKeyInput = movementKeyInput;
         this.random = new Random();
         this.periodicGenerators = new ArrayList<>();
-        build(handler, headsUpDisplay);
+        build(handler, healthBar);
     }
 
-    private void build(Handler handler, HeadsUpDisplay headsUpDisplay) {
-        Player player = addPlayer(handler, headsUpDisplay);
+    private void build(Handler handler, HealthBar healthBar) {
+        Player player = addPlayer(handler, healthBar);
         addAllRandomEnemy(handler);
         periodicallyAddRandomEnemy(handler);
         addHealthCollectables(handler, player);
@@ -86,7 +86,7 @@ class World {
         periodicGenerators.add(periodicEnemyGenerator);
     }
 
-    private Player addPlayer(Handler handler, HeadsUpDisplay headsUpDisplay) {
+    private Player addPlayer(Handler handler, HealthBar healthBar) {
         Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT), Color.BLUE);
         MacroKeyMovementBehaviour macroKeyMovementBehaviour = new MacroKeyMovementBehaviour(player);
         ResetColor resetColor = new ResetColor(player, 20);
@@ -101,7 +101,7 @@ class World {
         player.addBehaviour(macroKeyMovementBehaviour);
         player.addBehaviour(collisionForPlayer);
         player.addBehaviour(resetColor);
-        player.addObserver(headsUpDisplay);
+        player.addObserver(healthBar);
 
         addTrail(handler, player);
         handler.addObject(player);
