@@ -69,6 +69,6 @@ public class Trail extends GameObject {
 
     @Override
     public void render(Graphics graphics) {
-        trail.forEach((object) -> object.render(graphics));
+        trail.forEach(object -> object.render(graphics));
     }
 }

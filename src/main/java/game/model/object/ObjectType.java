@@ -5,5 +5,6 @@ public enum ObjectType {
     TRAIL_OBJECT,
     TRAIL,
     ENEMY,
-    HUD
+    HUD,
+    COLLECTABLE
 }

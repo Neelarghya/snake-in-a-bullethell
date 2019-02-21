@@ -16,6 +16,7 @@ public class Player extends MovableObject implements Observable, ColorResettable
     private static final int WIDTH = 40;
     private static final int HEIGHT = 40;
     private static final double DAMAGE_TAKEN_PER_HIT = 0.5;
+    public static int MAX_HEALTH = 100;
 
     private final List<Observer> observers;
     private double health;
@@ -26,7 +27,7 @@ public class Player extends MovableObject implements Observable, ColorResettable
         super(x, y, WIDTH, HEIGHT, PLAYER, new MovementConstants(3, 3, 8, .94));
         this.originalColor = originalColor;
         this.color = originalColor;
-        this.health = 100;
+        this.health = MAX_HEALTH;
         this.observers = new ArrayList<>();
     }
 
@@ -85,5 +86,9 @@ public class Player extends MovableObject implements Observable, ColorResettable
     @Override
     public void reSetColor() {
         this.color = originalColor;
+    }
+
+    public void gainHealth() {
+        health += 10;
     }
 }

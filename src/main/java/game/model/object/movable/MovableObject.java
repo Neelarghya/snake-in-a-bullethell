@@ -1,26 +1,19 @@
 package game.model.object.movable;
 
 import game.model.MovementConstants;
-import game.model.behaviour.Behaviour;
-import game.model.object.GameObject;
+import game.model.object.BehavingObject;
 import game.model.object.ObjectType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static game.common.Constant.WINDOW_HEIGHT;
 import static game.common.Constant.WINDOW_WIDTH;
 
-public abstract class MovableObject extends GameObject {
+public abstract class MovableObject extends BehavingObject {
     private final MovementConstants movementConstants;
     protected double xSpeed;
     protected double ySpeed;
 
-    private List<Behaviour> behaviours;
-
     MovableObject(double x, double y, int width, int height, ObjectType type, MovementConstants movementConstants) {
         super(x, y, width, height, type);
-        behaviours = new ArrayList<>();
         this.movementConstants = movementConstants;
         xSpeed = 0;
         ySpeed = 0;
@@ -28,11 +21,11 @@ public abstract class MovableObject extends GameObject {
 
     @Override
     public void tick() {
+        super.tick();
         move();
     }
 
     private void move() {
-        behaviours.forEach(Behaviour::behave);
         regulateSpeed();
         moveAsParSpeed();
         checkBoundaries();
@@ -70,10 +63,6 @@ public abstract class MovableObject extends GameObject {
     private void decaySpeed() {
         xSpeed *= movementConstants.getFriction();
         ySpeed *= movementConstants.getFriction();
-    }
-
-    public void addBehaviour(Behaviour behaviour) {
-        behaviours.add(behaviour);
     }
 
     public MovementConstants getMovementConstants() {

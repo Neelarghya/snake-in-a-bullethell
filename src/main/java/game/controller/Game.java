@@ -39,7 +39,7 @@ public class Game extends Canvas implements Runnable {
 
     private synchronized void stop() {
         try {
-            window.close();
+//            window.close();
             running = false;
             thread.join();
         } catch (InterruptedException e) {
@@ -79,7 +79,6 @@ public class Game extends Canvas implements Runnable {
             }
         }
     }
-
 
     private void tick() {
         world.tick();

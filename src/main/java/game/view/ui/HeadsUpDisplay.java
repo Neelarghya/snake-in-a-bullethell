@@ -9,6 +9,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static game.common.CustomColors.translucentGreen;
+import static game.common.CustomColors.translucentGrey;
 import static game.model.object.ObjectType.HUD;
 import static game.model.object.ObjectType.PLAYER;
 
@@ -29,15 +31,13 @@ public class HeadsUpDisplay implements Observer, Observable {
     }
 
     public void tick() {
-        width = (int) (playerHealth / 100 * MAX_WIDTH);
+        width = (int) (playerHealth / Player.MAX_HEALTH * MAX_WIDTH);
     }
 
     public void render(Graphics graphics) {
-        Color translucentGrey = new Color(0.7f, 0.7f, 0.7f, .6f);
         graphics.setColor(translucentGrey);
         graphics.fillRect(X_OFFSET, Y_OFFSET, MAX_WIDTH, HEIGHT);
 
-        Color translucentGreen = new Color(0.0f, 1f, 0.0f, .5f);
         graphics.setColor(translucentGreen);
         graphics.fillRect(X_OFFSET, Y_OFFSET, width, HEIGHT);
 
@@ -66,7 +66,7 @@ public class HeadsUpDisplay implements Observer, Observable {
 
     @Override
     public void notifyObservers() {
-        observers.forEach((observer) -> observer.update(this));
+        observers.forEach(observer -> observer.update(this));
     }
 
     @Override

@@ -5,6 +5,8 @@ import game.model.behaviour.visual.ResetColor;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
 import game.model.object.Handler;
+import game.model.object.immovable.Collectable;
+import game.model.object.immovable.HealthCollectable;
 import game.model.object.movable.Enemy;
 import game.model.object.movable.Player;
 import game.model.object.movable.Trail;
@@ -16,6 +18,7 @@ import java.util.Random;
 import static game.common.Constant.WINDOW_HEIGHT;
 import static game.common.Constant.WINDOW_WIDTH;
 import static game.model.object.ObjectType.ENEMY;
+import static game.model.object.ObjectType.PLAYER;
 
 class World {
     private Handler handler;
@@ -30,18 +33,34 @@ class World {
     }
 
     private void build(Handler handler, HeadsUpDisplay headsUpDisplay) {
-        addPlayer(handler, headsUpDisplay);
+        Player player = addPlayer(handler, headsUpDisplay);
         int numberOfEnemies = random.nextInt(5) + 5;
         for (int i = 0; i < numberOfEnemies; i++) {
             addRandomEnemy(handler);
         }
+        addHealthCollectables(handler, player);
+        addHealthCollectables(handler, player);
+        addHealthCollectables(handler, player);
+    }
+
+    private void addHealthCollectables(Handler handler, Player player) {
+        Collectable collectable = new HealthCollectable(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT));
+        Collision collision = new Collision(collectable, handler, PLAYER) {
+            @Override
+            protected void onCollide() {
+                player.gainHealth();
+                handler.remove(collectable);
+            }
+        };
+        collectable.addBehaviour(collision);
+        handler.addObject(collectable);
     }
 
     private void addRandomEnemy(Handler handler) {
         handler.addObject(new Enemy(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT)));
     }
 
-    private void addPlayer(Handler handler, HeadsUpDisplay headsUpDisplay) {
+    private Player addPlayer(Handler handler, HeadsUpDisplay headsUpDisplay) {
         Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT), Color.BLUE);
         MacroKeyMovementBehaviour macroKeyMovementBehaviour = new MacroKeyMovementBehaviour(player);
         ResetColor resetColor = new ResetColor(player, 20);
@@ -60,6 +79,7 @@ class World {
 
         addTrail(handler, player);
         handler.addObject(player);
+        return player;
     }
 
     private void addTrail(Handler handler, Player player) {
