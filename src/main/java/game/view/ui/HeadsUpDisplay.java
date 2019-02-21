@@ -14,7 +14,7 @@ import static game.model.object.ObjectType.PLAYER;
 
 public class HeadsUpDisplay implements Observer, Observable {
     private static final int MAX_WIDTH = 200;
-    private static final int HEIGHT = 30;
+    private static final int HEIGHT = 25;
     private static final int X_OFFSET = 30;
     private static final int Y_OFFSET = 30;
 
