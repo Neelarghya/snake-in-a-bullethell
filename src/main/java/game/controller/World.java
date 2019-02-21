@@ -40,7 +40,7 @@ class World {
 
     private void build(Handler handler, HeadsUpDisplay headsUpDisplay) {
         Player player = addPlayer(handler, headsUpDisplay);
-//        addAllRandomEnemy(handler);
+        addAllRandomEnemy(handler);
         periodicallyAddRandomEnemy(handler);
         addHealthCollectables(handler, player);
     }
@@ -64,7 +64,7 @@ class World {
     }
 
     private void addAllRandomEnemy(Handler handler) {
-        int numberOfEnemies = random.nextInt(5) + 5;
+        int numberOfEnemies = random.nextInt(2) + 1;
         for (int i = 0; i < numberOfEnemies; i++) {
             handler.addObject(new Enemy(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT)));
         }
@@ -82,7 +82,7 @@ class World {
             }
             return new Enemy(x, y);
         };
-        PeriodicGenerator periodicEnemyGenerator = new PeriodicGenerator(1, 500, handler, enemyGenerator, false);
+        PeriodicGenerator periodicEnemyGenerator = new PeriodicGenerator(1, 600, handler, enemyGenerator, false);
         periodicGenerators.add(periodicEnemyGenerator);
     }
 
