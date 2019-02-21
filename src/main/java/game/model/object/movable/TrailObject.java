@@ -1,21 +1,22 @@
 package game.model.object.movable;
 
 import game.model.MovementConstants;
+import game.model.object.ColorResettable;
 import game.model.object.ObjectType;
 
 import java.awt.*;
 import java.util.Random;
 
-public class TrailObject extends MovableObject {
+public class TrailObject extends MovableObject implements ColorResettable {
     private static final int WIDTH = 32;
     private static final int HEIGHT = 32;
     private final Color originalColor;
     private Color color;
 
-    TrailObject(double x, double y, MovementConstants movementConstants) {
+    TrailObject(double x, double y, MovementConstants movementConstants, Color color) {
         super(x, y, WIDTH, HEIGHT, ObjectType.TRAIL_OBJECT, movementConstants);
-        originalColor = Color.BLUE;
-        color = originalColor;
+        this.originalColor = color;
+        this.color = originalColor;
     }
 
     @Override
@@ -30,11 +31,13 @@ public class TrailObject extends MovableObject {
         graphics.fillRect((int) Math.round(x - WIDTH / 2.0), (int) Math.round(y - HEIGHT / 2.0), WIDTH, HEIGHT);
     }
 
-    void setColor(Color color) {
+    @Override
+    public void setColor(Color color) {
         this.color = color;
     }
 
-    private void reSetColor() {
+    @Override
+    public void reSetColor() {
         this.color = originalColor;
     }
 }

@@ -1,9 +1,9 @@
 package game.controller;
 
 import game.input.KeyInput;
-import game.view.ui.HeadsUpDisplay;
 import game.model.object.Handler;
 import game.view.Window;
+import game.view.ui.HeadsUpDisplay;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -18,6 +18,7 @@ public class Game extends Canvas implements Runnable {
 
     public Game(KeyInput keyInput, Handler handler) {
         headsUpDisplay = new HeadsUpDisplay();
+        headsUpDisplay.addObserver(observable -> running = false);
         running = false;
         world = new World(handler, keyInput, headsUpDisplay);
         this.addKeyListener(keyInput);
@@ -57,14 +58,15 @@ public class Game extends Canvas implements Runnable {
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
+
             while (delta >= 1) {
                 tick();
                 delta--;
             }
-            if (running)
-                render();
-            frames++;
 
+            render();
+
+            frames++;
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
 //                System.out.println("FPS: " + frames);

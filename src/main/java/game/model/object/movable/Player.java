@@ -63,7 +63,13 @@ public class Player extends MovableObject implements Observable {
 
     public void takeDamage() {
         health = health > 0 ? health - DAMAGE_TAKEN_PER_HIT : 0;
-        System.out.println("Health : " + health);
         notifyObservers();
+        if (health == 0) die();
+        else System.out.println("Health : " + health);
+    }
+
+    private void die(){
+        System.out.println("You Dead!");
+
     }
 }

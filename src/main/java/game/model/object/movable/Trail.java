@@ -2,6 +2,7 @@ package game.model.object.movable;
 
 import game.common.Action;
 import game.model.MovementConstants;
+import game.model.behaviour.ResetColor;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.Follow;
 import game.model.object.GameObject;
@@ -25,7 +26,7 @@ public class Trail extends GameObject {
         trail = new ArrayList<>();
     }
 
-    public void build(int trailLength, int elasticity, double maxAcceleration, double maxSpeed) {
+    public void build(int trailLength, int elasticity, double maxAcceleration, double maxSpeed, Color color) {
         GameObject lastObject = target;
 
         for (int index = elasticity; index < trailLength + elasticity; index++) {
@@ -34,7 +35,7 @@ public class Trail extends GameObject {
             double speed = calculatePercentage(maxSpeed, percentage);
             MovementConstants movementConstants = new MovementConstants(acceleration, acceleration, speed, .96);
 
-            TrailObject trailObject = new TrailObject(x, y, movementConstants);
+            TrailObject trailObject = new TrailObject(x, y, movementConstants, color);
             trailObject.addBehaviour(new Follow(trailObject, lastObject));
             lastObject = trailObject;
             trail.add(trailObject);
@@ -48,14 +49,16 @@ public class Trail extends GameObject {
 
     public void addCollision(Handler handler, ObjectType type, Action action, Color collisionColor) {
         trail.forEach(trailObject -> {
+            ResetColor resetColor = new ResetColor(trailObject, 20);
             Collision collision = new Collision(trailObject, handler, type) {
                 @Override
                 protected void onCollide() {
                     action.act();
-                    if (collisionColor != null) trailObject.setColor(collisionColor);
+                    resetColor.setColor(collisionColor);
                 }
             };
             trailObject.addBehaviour(collision);
+            trailObject.addBehaviour(resetColor);
         });
     }
 
