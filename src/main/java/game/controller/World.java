@@ -1,7 +1,7 @@
 package game.controller;
 
 import game.input.KeyInput;
-import game.model.behaviour.ResetColor;
+import game.model.behaviour.visual.ResetColor;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.keymovement.MacroKeyMovementBehaviour;
 import game.model.object.Handler;

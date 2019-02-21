@@ -1,5 +1,6 @@
-package game.model.behaviour;
+package game.model.behaviour.visual;
 
+import game.model.behaviour.Behaviour;
 import game.model.object.ColorResettable;
 
 import java.awt.*;

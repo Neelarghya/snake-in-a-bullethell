@@ -2,7 +2,7 @@ package game.model.object.movable;
 
 import game.common.Action;
 import game.model.MovementConstants;
-import game.model.behaviour.ResetColor;
+import game.model.behaviour.visual.ResetColor;
 import game.model.behaviour.collision.Collision;
 import game.model.behaviour.movement.Follow;
 import game.model.object.GameObject;
