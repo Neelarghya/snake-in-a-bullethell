@@ -73,8 +73,8 @@ class World {
     private void periodicallyAddRandomEnemy(Handler handler) {
         GameObjectGenerator enemyGenerator = () -> {
             int expectedThickness = 10;
-            int x = expectedThickness + random.nextInt(1) * (WINDOW_WIDTH - expectedThickness);
-            int y = expectedThickness + random.nextInt(1) * (WINDOW_HEIGHT - expectedThickness);
+            int x = (int) (expectedThickness + Math.round(random.nextDouble()) * (WINDOW_WIDTH - 2 * expectedThickness));
+            int y = (int) (expectedThickness + Math.round(random.nextDouble()) * (WINDOW_HEIGHT - 2 * expectedThickness));
             if (random.nextBoolean()) {
                 x = random.nextInt(WINDOW_WIDTH);
             } else {
