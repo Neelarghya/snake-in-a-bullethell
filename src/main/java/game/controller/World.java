@@ -82,7 +82,7 @@ class World {
             }
             return new Enemy(x, y);
         };
-        PeriodicGenerator periodicEnemyGenerator = new PeriodicGenerator(1, 600, handler, enemyGenerator, false);
+        PeriodicGenerator periodicEnemyGenerator = new PeriodicGenerator(3, 400, handler, enemyGenerator, true);
         periodicGenerators.add(periodicEnemyGenerator);
     }
 
