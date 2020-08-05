@@ -21,14 +21,15 @@ import java.util.Random;
 
 import static game.common.Constant.WINDOW_HEIGHT;
 import static game.common.Constant.WINDOW_WIDTH;
+import static game.common.CustomColors.snakeBlue;
 import static game.model.object.ObjectType.ENEMY;
 import static game.model.object.ObjectType.PLAYER;
 
 class World {
-    private Handler handler;
-    private MovementKeyInput movementKeyInput;
-    private Random random;
-    private List<PeriodicGenerator> periodicGenerators;
+    private final Random random;
+    private final Handler handler;
+    private final MovementKeyInput movementKeyInput;
+    private final List<PeriodicGenerator> periodicGenerators;
 
     World(Handler handler, MovementKeyInput movementKeyInput, HealthBar healthBar) {
         this.handler = handler;
@@ -59,7 +60,7 @@ class World {
             return collectable;
         };
 
-        PeriodicGenerator healthCollectableGenerator = new PeriodicGenerator(3, 400, handler, collectableGenerator, true);
+        PeriodicGenerator healthCollectableGenerator = new PeriodicGenerator(4, 400, handler, collectableGenerator, true);
         periodicGenerators.add(healthCollectableGenerator);
     }
 
@@ -82,12 +83,12 @@ class World {
             }
             return new Enemy(x, y);
         };
-        PeriodicGenerator periodicEnemyGenerator = new PeriodicGenerator(3, 400, handler, enemyGenerator, true);
+        PeriodicGenerator periodicEnemyGenerator = new PeriodicGenerator(2, 500, handler, enemyGenerator, false);
         periodicGenerators.add(periodicEnemyGenerator);
     }
 
     private Player addPlayer(Handler handler, HealthBar healthBar) {
-        Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT), Color.BLUE);
+        Player player = new Player(random.nextInt(WINDOW_WIDTH), random.nextInt(WINDOW_HEIGHT), snakeBlue);
         MacroKeyMovementBehaviour macroKeyMovementBehaviour = new MacroKeyMovementBehaviour(player);
         ResetColor resetColor = new ResetColor(player, 20);
         Collision collisionForPlayer = new Collision(player, handler, ENEMY) {
@@ -110,7 +111,7 @@ class World {
 
     private void addTrail(Handler handler, Player player) {
         Trail trail = new Trail(player);
-        trail.build(6, 50, 6, 8, Color.BLUE);
+        trail.build(6, 50, 6, 8, snakeBlue);
         trail.addCollision(handler, ENEMY, player::takeDamage, Color.RED);
         handler.addObject(trail);
     }

@@ -7,7 +7,7 @@ public abstract class GameObject {
     protected double y;
     protected final int width;
     protected final int height;
-    private ObjectType type;
+    private final ObjectType type;
 
     protected GameObject(double x, double y, int width, int height, ObjectType type) {
         this.x = x;

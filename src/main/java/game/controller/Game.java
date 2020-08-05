@@ -15,10 +15,12 @@ import static game.common.Constant.*;
 
 public class Game extends Canvas implements Runnable {
     private Thread thread;
-    private World world;
     private boolean running;
-    private final HeadsUpDisplay headsUpDisplay;
     private boolean closed = false;
+
+    private World world;
+    private final HeadsUpDisplay headsUpDisplay;
+
     private Window window;
 
     public Game(GameKeyInput gameKeyInput, MovementKeyInput movementKeyInput, Handler handler, HeadsUpDisplay headsUpDisplay) {
@@ -88,7 +90,9 @@ public class Game extends Canvas implements Runnable {
 
             while (delta >= 1 && delta < 10) {
                 tick();
-                render();
+                if (delta < 2) {
+                    render();
+                }
                 delta--;
             }
 

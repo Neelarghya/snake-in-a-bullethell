@@ -71,11 +71,11 @@ public class Player extends MovableObject implements Observable, ColorResettable
         health = health > 0 ? health - DAMAGE_TAKEN_PER_HIT : 0;
         notifyObservers();
         if (health == 0) die();
-        else System.out.println("Health : " + health);
+//        else System.out.println("Health : " + health);
     }
 
     private void die(){
-        System.out.println("You're Dead!");
+//        System.out.println("You're Dead!");
     }
 
     @Override

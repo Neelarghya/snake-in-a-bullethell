@@ -17,13 +17,13 @@ import static game.model.object.ObjectType.TRAIL;
 
 public class Trail extends GameObject {
     private static final double RATIO = 0.1;
-    private final List<TrailObject> trail;
+    private final List<TrailObject> trailObjects;
     private final GameObject target;
 
     public Trail(GameObject target) {
         super(target.getX(), target.getY(), 0, 0, TRAIL);
         this.target = target;
-        trail = new ArrayList<>();
+        trailObjects = new ArrayList<>();
     }
 
     public void build(int trailLength, int elasticity, double maxAcceleration, double maxSpeed, Color color) {
@@ -38,7 +38,7 @@ public class Trail extends GameObject {
             TrailObject trailObject = new TrailObject(x, y, movementConstants, color);
             trailObject.addBehaviour(new Follow(trailObject, lastObject));
             lastObject = trailObject;
-            trail.add(trailObject);
+            trailObjects.add(trailObject);
         }
     }
 
@@ -48,7 +48,7 @@ public class Trail extends GameObject {
     }
 
     public void addCollision(Handler handler, ObjectType type, Action action, Color collisionColor) {
-        trail.forEach(trailObject -> {
+        trailObjects.forEach(trailObject -> {
             ResetColor resetColor = new ResetColor(trailObject, 20);
             Collision collision = new Collision(trailObject, handler, type) {
                 @Override
@@ -64,11 +64,11 @@ public class Trail extends GameObject {
 
     @Override
     public void tick() {
-        trail.forEach(TrailObject::tick);
+        trailObjects.forEach(TrailObject::tick);
     }
 
     @Override
     public void render(Graphics graphics) {
-        trail.forEach(object -> object.render(graphics));
+        trailObjects.forEach(object -> object.render(graphics));
     }
 }
